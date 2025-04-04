@@ -1,0 +1,57 @@
+Get http://localhost:8080/users
+
+###
+
+Get http://localhost:8080/users/67ee136aecaae2d703767513
+
+###
+POST http://localhost:8080/users/add
+Content-Type: application/json
+
+{
+    "name": "Lê Hoàng Giang",
+    "age": 20,
+    "email": "crglh25@gmail.com",
+    "address": "Đồng Nai"
+}
+###
+
+PUT  http://localhost:8080/users/update/67ee136aecaae2d703767513
+Content-Type: application/json
+
+{
+    "name": "Nguyễn Văn Hoàng",
+    "age": 20,
+    "email": "siro@gmail.com",
+    "address": "TPHCM"
+}
+### 
+DELETE http://localhost:8080/users/delete/67ee00f6dde653739d16b974
+
+### posts
+GET  http://localhost:8080/posts
+
+###
+GET http://localhost:8080/posts/67ef681f8e17ece93077c088
+
+###
+POST http://localhost:8080/posts/add
+Content-Type: application/json
+
+{
+    "title": "Cach ngu 4h trong 2h",
+    "content": "Toi se huong dan ban cach ngu 2 h trong 81243 h voi 2 li do sau day",
+    "author": "67ee1531e84d9b6562ec17c5"
+}
+###
+DELETE http://localhost:8080/posts/delete/67ef681f8e17ece93077c088
+
+###
+PUT  http://localhost:8080/posts/update/67ef691a2f5e05992c6e3aa5
+Content-Type: application/json
+
+{
+    "title": "Premium cach ngu 8h trong 2h",
+    "content": "nay toi se huong dan manh hon",
+    "author": "67ee136aecaae2d703767513"
+}

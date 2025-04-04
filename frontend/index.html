@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="style.css" />
+    <title>User and Posts</title>
+  </head>
+  <body>
+    <div class="container">
+      <!-- User Section -->
+      <div class="column">
+        <h1>Users</h1>
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Name</th>
+              <th>Age</th>
+              <th>Email</th>
+              <th>Address</th>
+            </tr>
+          </thead>
+          <tbody id="user-list"></tbody>
+        </table>
+
+        <h2>Add New User</h2>
+        <input type="text" id="user-name" placeholder="Name" />
+        <input type="number" id="user-age" placeholder="Age" />
+        <input type="email" id="user-email" placeholder="Email" />
+        <input type="text" id="user-address" placeholder="Address" />
+        <button onclick="createUser()">Add User</button>
+
+        <h2>Update User</h2>
+        <input type="text" id="update-user-id" placeholder="User ID" />
+        <input type="text" id="update-user-name" placeholder="New Name" />
+        <input type="number" id="update-user-age" placeholder="New Age" />
+        <input type="email" id="update-user-email" placeholder="New Email" />
+        <input type="text" id="update-user-address" placeholder="New Address" />
+        <button onclick="updateUser()">Update User</button>
+
+        <h2>Delete User</h2>
+        <input
+          type="text"
+          id="delete-user-id"
+          placeholder="User ID to Delete"
+        />
+        <button onclick="deleteUser()">Delete User</button>
+      </div>
+
+      <!-- Post Section -->
+      <div class="column">
+        <h1>Posts</h1>
+        <table>
+          <thead>
+            <tr>
+              <th>Title</th>
+              <th>Content</th>
+              <th>Author</th>
+            </tr>
+          </thead>
+          <tbody id="post-list"></tbody>
+        </table>
+
+        <h2>Add New Post</h2>
+        <input type="text" id="post-title" placeholder="Title" />
+        <input type="text" id="post-content" placeholder="Content" />
+        <input type="text" id="post-author" placeholder="Author ID" />
+        <button onclick="createPost()">Add Post</button>
+
+        <h2>Update Post</h2>
+        <input type="text" id="update-post-id" placeholder="Post ID" />
+        <input type="text" id="update-post-title" placeholder="New Title" />
+        <input type="text" id="update-post-content" placeholder="New Content" />
+        <input
+          type="text"
+          id="update-post-author"
+          placeholder="New Author ID"
+        />
+        <button onclick="updatePost()">Update Post</button>
+
+        <h2>Delete Post</h2>
+        <input
+          type="text"
+          id="delete-post-id"
+          placeholder="Post ID to Delete"
+        />
+        <button onclick="deletePost()">Delete Post</button>
+      </div>
+    </div>
+
+    <script>
+      const API = "http://localhost:3026";
+
+      async function fetchUsers() {
+        const res = await fetch(`${API}/users`);
+        const data = await res.json();
+        const list = document.getElementById("user-list");
+        list.innerHTML = data
+          .map(
+            (user) => `
+        <tr>
+          <td>${user._id}</td>
+          <td>${user.name}</td>
+          <td>${user.age}</td>
+          <td>${user.email}</td>
+          <td>${user.address}</td>
+        </tr>
+      `
+          )
+          .join("");
+      }
+
+      async function fetchPosts() {
+        const res = await fetch(`${API}/posts`);
+        const data = await res.json();
+        const list = document.getElementById("post-list");
+        list.innerHTML = data
+          .map(
+            (post) => `
+        <tr>
+          <td>${post.title}</td>
+          <td>${post.content}</td>
+          <td>${post.author?.name || ""}</td>
+        </tr>
+      `
+          )
+          .join("");
+      }
+
+      async function createUser() {
+        const name = document.getElementById("user-name").value;
+        const age = document.getElementById("user-age").value;
+        const email = document.getElementById("user-email").value;
+        const address = document.getElementById("user-address").value;
+
+        await fetch(`${API}/users/add`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ name, age, email, address }),
+        });
+
+        fetchUsers();
+      }
+
+      async function updateUser() {
+        const id = document.getElementById("update-user-id").value;
+        const name = document.getElementById("update-user-name").value;
+        const age = document.getElementById("update-user-age").value;
+        const email = document.getElementById("update-user-email").value;
+        const address = document.getElementById("update-user-address").value;
+
+        await fetch(`${API}/users/update/${id}`, {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ name, age, email, address }),
+        });
+
+        fetchUsers();
+      }
+
+      async function deleteUser() {
+        const id = document.getElementById("delete-user-id").value;
+        await fetch(`${API}/users/delete/${id}`, {
+          method: "DELETE",
+        });
+        fetchUsers();
+      }
+
+      async function createPost() {
+        const title = document.getElementById("post-title").value;
+        const content = document.getElementById("post-content").value;
+        const author = document.getElementById("post-author").value;
+
+        await fetch(`${API}/posts/add`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ title, content, author }),
+        });
+
+        fetchPosts();
+      }
+
+      async function updatePost() {
+        const id = document.getElementById("update-post-id").value;
+        const title = document.getElementById("update-post-title").value;
+        const content = document.getElementById("update-post-content").value;
+        const author = document.getElementById("update-post-author").value;
+
+        await fetch(`${API}/posts/update/${id}`, {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ title, content, author }),
+        });
+
+        fetchPosts();
+      }
+
+      async function deletePost() {
+        const id = document.getElementById("delete-post-id").value;
+        await fetch(`${API}/posts/delete/${id}`, {
+          method: "DELETE",
+        });
+        fetchPosts();
+      }
+
+      fetchUsers();
+      fetchPosts();
+    </script>
+  </body>
+</html>
