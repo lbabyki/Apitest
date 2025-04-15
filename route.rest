@@ -59,13 +59,15 @@ Content-Type: application/json
 
 ###transaction
 
-POST http://localhost:3026/transaction/api/add
+POST https://be.myporfolio.io.vn/transactions/api/add
 Content-Type: application/json
 
 {
-  "accountNumber": "123456789",
+  "accountNumber": "123456787",
   "name": "Nguyen Van A",
-  "amount": 200000,
   "date": "2025-04-15T12:30:00.000Z",
-  "message": "Nap tien mua sach"
+  "amount": 200000,
+  "message": "Ung ho nguoi ngheo"
 }
+###
+GET https://be.myporfolio.io.vn/transactions?page=3

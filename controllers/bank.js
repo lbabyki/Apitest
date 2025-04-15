@@ -2,10 +2,11 @@ const express = require("express");
 const Transaction = require("../models/transaction");
 
 const addTransaction = async (req, res) => {
-  const { accountNumber, date, amount, message } = req.body;
+  const { accountNumber, name, date, amount, message } = req.body;
   try {
     const newTransaction = new Transaction({
       accountNumber,
+      name,
       date,
       amount,
       message,
@@ -13,14 +14,14 @@ const addTransaction = async (req, res) => {
     await newTransaction.save();
     res.status(201).json(newTransaction);
   } catch (err) {
-    res.status(401).json({ message: "Dữ liệu không hợp lệ" });
+    res.status(401).json({ message: "Dữ liệu không hợp lệ" }, err);
   }
 };
 
 const getTransaction = async (req, res) => {
   try {
     const page = parseInt(req.query.page) || 1;
-    const limit = parseInt(req.query.limit) || 10;
+    const limit = parseInt(req.query.limit) || 11;
     const skip = (page - 1) * limit;
 
     const {
