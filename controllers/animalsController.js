@@ -5,10 +5,10 @@ const Animal = require("../models/animals");
 
 const getAnimals = async (req, res) => {
   try {
-    const post = await Post.find().populate("author", "name age email");
-    res.status(200).json(post);
+    const animal = await Animal.find();
+    res.status(200).json(animal);
   } catch (err) {
-    res.status(500).send("loi khi tai posts", err);
+    res.status(500).send("loi khi tai animals", err);
   }
 };
 const getAnAnimal = async (req, res) => {
