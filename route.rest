@@ -1,4 +1,4 @@
-Get http://localhost:8080/users
+Get https:/be.myporfolio.io.vn/users
 
 ###
 
@@ -54,4 +54,18 @@ Content-Type: application/json
     "title": "Premium cach ngu 8h trong 2h",
     "content": "nay toi se huong dan manh hon",
     "author": "67ee136aecaae2d703767513"
+}
+
+
+###transaction
+
+POST http://localhost:3026/transaction/api/add
+Content-Type: application/json
+
+{
+  "accountNumber": "123456789",
+  "name": "Nguyen Van A",
+  "amount": 200000,
+  "date": "2025-04-15T12:30:00.000Z",
+  "message": "Nap tien mua sach"
 }
