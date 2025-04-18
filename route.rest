@@ -74,3 +74,30 @@ GET https://be.myporfolio.io.vn/transactions?page=3
 
 
 ###
+POST https://be.myporfolio.io.vn/animals/add
+Content-Type: application/json
+
+{
+  "animalName": "Tê Tê",
+  "subtitle": "Loài có vú bị săn nhiều nhất trên thế giới",
+  "videoDescription": "https://www.youtube.com/watch?v=Frn-vX8yCMQ",
+  "animalInfoHtml": "",
+  "threatInfoHtml": "",
+  "hunted": true,
+  "rescueData": {
+    "rescued": 5,
+    "recoveryProcess": "~ 60%"
+  },
+  "sponsorImages": [
+    "https://media.istockphoto.com/id/512292162/vi/anh/t%C3%AA-t%C3%AA-s%C4%83n-ki%E1%BA%BFn.jpg?s=612x612&w=0&k=20&c=mDMJchgJ52R86t_HDJlB0Lh-q9blyBH1nlGTW4mVj_4=",
+    "https://www.thiennhien.net/wp-content/uploads/2019/12/191219_Pangolin.jpg",
+    "https://ik.imagekit.io/tvlk/blog/2024/10/te-te-1-1024x682.jpeg?tr=q-70,c-at_max,w-500,h-300,dpr-2",
+    "https://cdn.baoquocte.vn/stores/news_dataimages/minhhoa/042017/06/22/220231_Untitled.jpg"
+  ]
+}
+###
+GET https://be.myporfolio.io.vn/animals
+
+
+###
+GET https://be.myporfolio.io.vn/animals/67fe88b47e31ffeb4e94f0c2

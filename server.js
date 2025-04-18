@@ -8,6 +8,7 @@ const postRoute = require("./routes/posRoute");
 const authRoute = require("./routes/authRoute");
 const bankRoute = require("./routes/bankRoute");
 const animalRoute = require("./routes/animalsRoute");
+const newsRoute = require("./routes/newsRoute");
 
 const cors = require("cors");
 const PORT = process.env.PORT;
@@ -25,6 +26,7 @@ app.use("/users", userRoute);
 app.use("/posts", postRoute);
 app.use("/auth", authRoute);
 app.use("/animals", animalRoute);
+app.use("/news", newsRoute);
 
 app.listen(PORT, () => {
   console.log(`Server is running at http://localhost:${PORT}`);
