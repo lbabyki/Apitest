@@ -2,9 +2,8 @@ const express = require("express");
 const axios = require("axios");
 const cheerio = require("cheerio");
 
-const url = "https://thanhnien.vn/dong-vat-hoang-da-tags497033.html";
-
 const getNews = async (req, res) => {
+  const url = "https://thanhnien.vn/dong-vat-hoang-da-tags497033.html";
   try {
     const response = await axios.get(url, {
       headers: {
